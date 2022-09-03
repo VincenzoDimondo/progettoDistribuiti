@@ -1,0 +1,26 @@
+<p (drawer)="drawer"></p>
+<mat-toolbar color="accent" class="barra">
+  <mat-toolbar-row>
+    <mat-icon>cloud</mat-icon>
+    <mat-icon></mat-icon>
+    <b> <i selectable="false"> Sistemi Distribuiti & Cloud Computing </i> </b>
+    <mat-icon></mat-icon>
+    <mat-icon>cloud_queue</mat-icon>
+    <mat-icon></mat-icon>
+    <span class="example-spacer"></span>
+    <!--
+    <mat-slider disabled="true"></mat-slider>
+    <mat-icon></mat-icon>
+      <div id="clock">
+        -- : -- : --
+        <app-orologio></app-orologio>
+      </div>
+      <mat-icon></mat-icon>
+      <mat-icon>timelapse</mat-icon>
+    -->
+    <span class="example-spacer"></span>
+    <button mat-icon-button (click)="this.drawer.open()">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar>

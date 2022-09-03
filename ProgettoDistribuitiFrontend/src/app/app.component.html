@@ -1,0 +1,37 @@
+<mat-drawer-container hasBackdrop="true" class="example-container">
+  <mat-drawer #drawer mode="side" position="end" style="position: fixed;">
+    <br><br>
+    <p style="text-align: center;">
+      Menu
+    </p>
+    <br><br>
+    <mat-divider></mat-divider>
+    <button *ngIf="!loggedIn" mat-stroked-button (click)="vaiLogin();drawer.close()" style="border: 0px; width: 100%;"> Login
+      <mat-icon> person</mat-icon>
+    </button>
+    <button *ngIf="loggedIn" mat-stroked-button (click)="vaiLogout();drawer.close()" style="border: 0px; width: 100%;"> Logout
+      <mat-icon> person</mat-icon>
+    </button>
+    <mat-divider></mat-divider>
+    <button *ngIf="loggedIn" mat-stroked-button (click)="vaiHome();drawer.close()" style="border: 0px; width: 100%;"> Home
+      <mat-icon> home</mat-icon>
+    </button>
+    <mat-divider></mat-divider>
+    <button mat-stroked-button (click)="vaiTraccia();drawer.close()" style="border: 0px; width: 100%;"> Traccia
+      <mat-icon> border_color</mat-icon>
+    </button>
+    <mat-divider *ngIf="loggedIn"></mat-divider>
+    <button *ngIf="loggedIn" mat-stroked-button (click)="vaiInserisci();drawer.close()" style="border: 0px; width: 100%;"> Inserisci
+      DataSet
+    </button>
+    <mat-divider *ngIf="loggedIn"></mat-divider>
+    <button *ngIf="loggedIn" mat-stroked-button (click)="vaiElenco();drawer.close()" style="border: 0px; width: 100%;"> History DataSet
+    </button>
+    <mat-divider></mat-divider>
+  </mat-drawer>
+  <mat-drawer-content>
+    <app-barra [drawer]="drawer"></app-barra>
+  </mat-drawer-content>
+</mat-drawer-container>
+
+<router-outlet></router-outlet>
