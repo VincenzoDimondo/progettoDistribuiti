@@ -1,0 +1,58 @@
+
+<div style="background-color: #212121; width: 100%; height: 100%; position: fixed; margin-top: 0%; margin-bottom: 2%;">
+  <div style="margin-left: 13%; margin-right: 13%; margin-top: 8%; margin-bottom: 7%; color: #d0d0d0;">
+    <h3 class="not-sel" style="margin-left: 5%">Inserisci i tuoi dati qui per registrarti </h3>
+    <p> {{ message }} </p>
+    <form class="example-form">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label> Nome </mat-label>
+        <input type="text" matInput [formControl]="nomeFormControl" placeholder="Nome">
+        <mat-error *ngIf="nomeFormControl.hasError('required')">
+          <strong class="not-sel"> Inserire un nome valido ! </strong>
+        </mat-error>
+      </mat-form-field>
+    </form>
+    <br>
+    <form class="example-form">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label> Cognome </mat-label>
+        <input type="text" matInput [formControl]="cognomeFormControl" placeholder="Cognome">
+        <mat-error *ngIf="cognomeFormControl.hasError('required')">
+          <strong class="not-sel"> Inserire un cognome valido ! </strong>
+        </mat-error>
+      </mat-form-field>
+    </form>
+    <br>
+    <form class="example-form">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label> Email </mat-label>
+        <input type="email" matInput [formControl]="emailFormControl" placeholder="email@esempio.com">
+        <mat-error *ngIf="emailFormControl.hasError('email') || emailFormControl.hasError('required')">
+          <strong class="not-sel"> Inserire una mail valida ! </strong>
+        </mat-error>
+      </mat-form-field>
+    </form>
+    <br>
+    <div class="example-container">
+      <mat-form-field class="example-form" appearance="fill">
+        <mat-label> Password </mat-label>
+        <input matInput [type]= "hide ? 'password' : 'text'" [formControl]= "passwordFormControl" placeholder="password">
+        <mat-error *ngIf="passwordFormControl.hasError('required')">
+          <strong class="not-sel"> Inserire una password valida ! </strong>
+        </mat-error>
+        <button mat-icon-button matSuffix (click)= "hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]= "hide" class="button">
+          <mat-icon> {{ hide ? 'visibility_off' : 'visibility' }} </mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+    <br><br>
+    <mat-error class="alert alert-danger" role="alert" *ngIf='message' class="not-sel" style="margin-left: 5%">
+      <strong> {{ message }} </strong>
+    </mat-error>
+    <br>
+    <button mat-raised-button color="warn" type="button" (click)="addUser()"
+      [disabled]="!nomeFormControl.valid || !cognomeFormControl.valid || !emailFormControl.valid || !passwordFormControl.valid">
+      Invia Dati
+    </button>
+  </div>
+</div>

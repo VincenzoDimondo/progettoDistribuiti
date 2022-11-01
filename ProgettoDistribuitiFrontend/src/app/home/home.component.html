@@ -1,0 +1,33 @@
+
+<div style="background-color: #212121; width: 100%; height: 100%; position: fixed; margin-top: 0%; margin-bottom: 0%;">
+  <div style="margin-left: 18%; margin-right: 18%; margin-top: 3%; margin-bottom: 3%; margin-left: 3%; margin-right: 3%;">
+    <mat-card style="min-width: 96%; min-height: 96%; max-width: 96%; max-height: 96%;">
+      <mat-card-title-group>
+        <mat-card-title style="color: #c3c3c3;">
+          Benvenuto
+        </mat-card-title>
+        <mat-card-subtitle>
+          <br>
+          <u> Dati personali </u>
+        </mat-card-subtitle>
+        <img mat-card-md-image src="https://play-lh.googleusercontent.com/TckA-A_COVAujJtzvpgGhwVkkYCBEDbZe-GLaA9kVbZra1Vcoy7oPXCUG3y0GP2AZg">
+      </mat-card-title-group>
+      <mat-card-content>
+        <div *ngIf="!caricato">
+          <h1>
+            Dati personali in caricamento...
+          </h1>
+        </div>
+        <div *ngIf="caricato" style="color: #d0e0e0;">
+          Nome: <i style="color: #8ff5ff;"> {{ utenteLogged.nome }} </i>
+          <br><br>
+          Cognome: <i style="color: #8ff5ff;"> {{ utenteLogged.cognome }} </i>
+          <br><br>
+          E-mail: <i style="color: #8ff5ff;"> {{ utenteLogged.email }} </i>
+          <br><br>
+          <mat-divider></mat-divider>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

@@ -1,0 +1,54 @@
+
+<div style="background-color: #212121; width: 100%; height: 100%; position: fixed; margin-top: 0%; margin-bottom: 0%;">
+  <div style="margin-left: 2%; margin-right: 2%; margin-top: 0%; margin-bottom: 0%; position: absolute;">
+    <br>
+    <cdk-virtual-scroll-viewport itemSize="500" class="example-viewport">
+      <div class="example-item" *ngIf="load">
+        <div>
+          <button mat-icon-button> <mat-icon color="warn" (click)="vaiElenco()"> keyboard_backspace </mat-icon> </button>
+          <button mat-icon-button style="float: right;" (click)="vaiElimina()"> <mat-icon color="warn"> delete </mat-icon> </button>
+        </div>
+        <mat-paginator [length]="numDocs" [pageSize]="numElementi" [pageSizeOptions]="[5, 10, 15, 20, 25]" [showFirstLastButtons]="true"
+                        aria-label="Select page" (page)="changePageEvent($event)">
+        </mat-paginator>
+
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+          <ng-container matColumnDef="sentence text">
+            <th mat-header-cell *matHeaderCellDef> Twitt Full Text Sentence </th>
+            <td mat-cell *matCellDef="let element">
+              <p *ngFor="let sent of element.sentences">
+                {{ sent.text }}
+              </p>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="sentiment">
+            <th mat-header-cell *matHeaderCellDef> Sentiment  </th>
+            <td mat-cell *matCellDef="let element"> {{ element.sentiment }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="% confidence score positive">
+            <th mat-header-cell *matHeaderCellDef> % positive </th>
+            <td mat-cell *matCellDef="let element"> {{ element.confidenceScores.positive }} % </td>
+          </ng-container>
+
+          <ng-container matColumnDef="% confidence score neutre">
+            <th mat-header-cell *matHeaderCellDef> % neutre </th>
+            <td mat-cell *matCellDef="let element"> {{ element.confidenceScores.neutre }} % </td>
+          </ng-container>
+
+          <ng-container matColumnDef="% confidence score negative">
+            <th mat-header-cell *matHeaderCellDef> % negative </th>
+            <td mat-cell *matCellDef="let element"> {{ element.confidenceScores.negative }} % </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+    </cdk-virtual-scroll-viewport>
+    <br><br>
+
+  </div>
+</div>

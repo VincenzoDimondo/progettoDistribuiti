@@ -1,0 +1,89 @@
+
+<div style="background-color: #212121; width: 100%; height: 96%; position: absolute; margin-top: 0%; margin-bottom: 0%;">
+  <button mat-fab (click)="resetAll()" style="position: absolute; margin-left: 2%; margin-top: 2%;" (focus)="true">
+    reload
+  </button>
+  <div style="margin-left: 18%; margin-right: 18%; margin-top: 7%; margin-bottom: 0%;">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons&display=block" rel="stylesheet">
+    <!--
+      <div>
+        <mat-form-field appearance="fill" class="example-full-width" >
+          <mat-label>Lingua</mat-label>
+          <mat-select type="language" required [formControl]="linguaFormControl">
+            <mat-option value="it">it</mat-option>
+            <mat-option value="en">en</mat-option>
+            <mat-option value="es">es</mat-option>
+          </mat-select>
+          <mat-hint>Errors appear instantly!</mat-hint>
+          <mat-error *ngIf="linguaFormControl.hasError('url') && !linguaFormControl.hasError('required')">
+            Please enter a valid url address of dataset
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <br>
+    -->
+    <div *ngIf="enterControl.value=='url'">
+      <h3 style="color: #d0d0d0;" *ngIf="(urlFormControl.hasError('url') || urlFormControl.hasError('required'))">
+        Inserisci l'url del dataset da analizzare
+      </h3>
+      <h3 style="color: #d0d0d0;" *ngIf="!urlFormControl.hasError('url') && !urlFormControl.hasError('required')">
+        Se l'URL è esatto clicca per analizzare!
+      </h3>
+      <br>
+      <form class="example-form" (submit)="$event.preventDefault()" class="example-full-width">
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Url</mat-label>
+          <input type="url" matInput [formControl]="urlFormControl">
+          <mat-hint>Errors appear instantly!</mat-hint>
+          <mat-error *ngIf="urlFormControl.hasError('url') && !urlFormControl.hasError('required')">
+            Please enter a valid url address of dataset
+          </mat-error>
+          <mat-error *ngIf="urlFormControl.hasError('required')">
+            Dataset-Url is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+        <br><br>
+        <button mat-raised-button (click)="valuta()" [disabled]="sentimentInput.length==0">
+          Sentiment Analysis Url
+        </button>
+      </form>
+    </div>
+
+    <div *ngIf="enterControl.value=='text'">
+      <h3 style="color: #d0d0d0;" *ngIf="(fileControl.hasError('url') || fileControl.hasError('required'))">
+        Inserisci il file del dataset da analizzare
+      </h3>
+      <h3 style="color: #d0d0d0;" *ngIf="!fileControl.hasError('url') && !fileControl.hasError('required')">
+        Clicca per analizzare!
+      </h3>
+      <br><br>
+      <mat-form-field  [formGroup]="fileForm">
+        <ngx-mat-file-input type="file" formControlName="fileControl" class="form-control" accept=".json" name="file" color="accent" [multiple]="false" >
+          <mat-icon ngxMatFileInputIcon>folder</mat-icon>
+        </ngx-mat-file-input>
+      </mat-form-field>
+      <br><br>
+      <button mat-raised-button (click)="sentimentAnalysisProcedure()" [disabled]="!txt" *ngIf="percentuale<0 || percentuale==100">
+        Sentiment Analysis File
+      </button>
+      <br><br>
+    </div>
+    <section *ngIf="!enterControl.value">
+      <mat-button-toggle-group [formControl]="enterControl" aria-label="Font Style" class="example-full-width">
+        <mat-button-toggle value="url" class="example-full-width"> Analizza Dataset da URL</mat-button-toggle>
+        <mat-button-toggle value="text" class="example-full-width"> Analizza Dataset da FILE</mat-button-toggle>
+      </mat-button-toggle-group>
+    </section>
+  </div>
+  <div style="position: absolute; margin-left: 42%; margin-top: 2%;" *ngIf="percentuale>0 && percentuale<100">
+    <mat-progress-spinner mode="determinate" [value]="percentuale" color="warn"></mat-progress-spinner>
+    <h1 style="color:#d0d0d0;margin-left: 7%;">
+      {{ percentuale }} %
+    </h1>
+  </div>
+  <!--
+    <button mat-raised-button (click)="provaValuta()">
+      CLICK PROVA
+    </button>
+  -->
+</div>

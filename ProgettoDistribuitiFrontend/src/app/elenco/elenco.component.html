@@ -1,0 +1,61 @@
+
+
+<div style="background-color: #212121; width: 100%; height: 100%; position: fixed; margin-top: 0%; margin-bottom: 2%;">
+  <div style="margin-left: 3%; margin-right: 3%; margin-top: 5%; margin-bottom: 7%;">
+    <cdk-virtual-scroll-viewport itemSize="1" class="example-viewport">
+      <h2 style="color: #d0d0d0;">
+        Hai analizzato {{ lengthDataset }} Documenti
+      </h2>
+      <!--
+        <h4 style="color: #d0d0d0;" *ngIf="DATASET.length != lengthDataset">
+          (Se non li visualizzi tutti attendere il caricamento dal Database!)
+        </h4>
+      -->
+      <mat-paginator [length]="lengthDataset" [pageSize]="numElementi" [pageSizeOptions]="[2, 3, 4, 5, 7]" [showFirstLastButtons]="true"
+                        aria-label="Select page" (page)="changePageEvent($event)">
+      </mat-paginator>
+      <div *ngFor="let item of DATASET">
+        <mat-divider></mat-divider>
+        <mat-accordion>
+          <mat-expansion-panel style="color: #d0d0d0;">
+            <mat-expansion-panel-header>
+              <mat-panel-title style="color: #d0d0d0;">
+                Dataset n°{{ item.id }}
+              </mat-panel-title>
+              <mat-panel-description style="color: #d0d0d0;">
+                Data analisi = {{ item.date.toString() | slice : 8:10 }}/{{ getMese(item.date.toString() | slice : 5:7) }}/{{ item.date.toString() | slice : 0:4 }}
+                - h {{ item.date.toString() | slice : 11:19 }}
+                <mat-icon></mat-icon>
+                Numero di Twitt analizzati = {{ item.numberDocs }}
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <button mat-stroked-button style=" margin-left: 88%;" (click)="vaiDettagli(item)"> Dettagli </button>
+            <div style="margin-top: 0%;">
+              <mat-progress-spinner [value]="item.confidenceScores.positive*100" style="float: left; margin-left: 22%; margin-right: 3%;">
+              </mat-progress-spinner>
+              <mat-progress-spinner [value]="item.confidenceScores.neutre*100" style="float: left; margin-left: 3%; margin-right: 6%;">
+              </mat-progress-spinner>
+              <mat-progress-spinner [value]="item.confidenceScores.negative*100" style="float: letf; margin-left: 16%; margin-right: 9%;">
+              </mat-progress-spinner>
+            </div>
+            <div>
+              <br>
+              <p style="float: left; margin-left: 23%; margin-right: 3%;">
+                positive {{ arrotonda(item.confidenceScores.positive*10000)/100 }} %
+              </p>
+              <p style="float: left; margin-left: 5%; margin-right: 3%;">
+                neutre {{ arrotonda(item.confidenceScores.neutre*10000)/100 }} %
+              </p>
+              <p style="float: left; margin-left: 5%; margin-right: 3%;">
+                negative {{ arrotonda(item.confidenceScores.negative*10000)/100 }} %
+              </p>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+        <mat-divider></mat-divider>
+      </div>
+
+      <br>
+    </cdk-virtual-scroll-viewport>
+  </div>
+</div>

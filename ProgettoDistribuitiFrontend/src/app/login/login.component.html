@@ -1,0 +1,44 @@
+
+
+<div style="background-color: #212121; width: 100%; height: 100%; position: fixed; margin-top: 0%; margin-bottom: 2%;">
+  <div style="margin-left: 13%; margin-right: 13%; margin-top: 8%; margin-bottom: 7%; color: #d0d0d0;">
+    <form class="example-form" (submit)="$event.preventDefault()" class="example-full-width">
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>E-mail</mat-label>
+          <input type="url" matInput [formControl]="emailFormControl">
+          <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+            Please enter a valid email address!
+          </mat-error>
+          <mat-error *ngIf="emailFormControl.hasError('required')">
+            Email is <strong>required</strong> to login!
+          </mat-error>
+        </mat-form-field>
+        <br><br>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Password</mat-label>
+          <input [type]= "hide ? 'password' : 'text'" matInput [formControl]="passwordFormControl">
+          <mat-error *ngIf="passwordFormControl.hasError('required')">
+            Password is <strong>required</strong> to login!
+          </mat-error>
+          <button mat-icon-button matSuffix (click)= "hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]= "hide" class="button">
+            <mat-icon> {{ hide ? 'visibility_off' : 'visibility' }} </mat-icon>
+          </button>
+        </mat-form-field>
+        <br><br><br>
+      </form>
+      <button mat-raised-button (click)="login()"
+              [disabled]="emailFormControl.hasError('email') || emailFormControl.hasError('required') || passwordFormControl.hasError('required')">
+        Login
+      </button>
+      <br>
+      <mat-error *ngIf="message != ''" style="margin-left: 5%;">
+        <strong> {{ message }} </strong>
+      </mat-error>
+  </div>
+  <mat-divider></mat-divider>
+  <div style="margin-left: 13%; margin-right: 13%; margin-top: 3%; margin-bottom: 7%; color: #d0d0d0;">
+    <button mat-stroked-button (click)="vaiRegistrati()">
+      Registrati
+    </button>
+  </div>
+</div>
